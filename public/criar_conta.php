@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if(isset($_SESSION['status']) && $_SESSION['status'] === 1){
+        header('location: http://localhost:8080/home.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -23,7 +29,7 @@
             <label for="senha">Confirmar senha</label>
             <input class="dados" type="password" name="confirmar_senha" id="confirmarSenha" required>
             <? if (isset($_GET['acesso']) && $_GET['acesso'] == 'nome_em_uso'){?>
-                <p>Esse nome já sendo usado</p>
+                <p>Esse nome já está sendo usado</p>
             <?}?>
             <? if (isset($_GET['acesso']) && $_GET['acesso'] == 'email_invalido'){?>
                 <p>Email invalido</p>
