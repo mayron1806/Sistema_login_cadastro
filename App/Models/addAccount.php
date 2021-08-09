@@ -7,10 +7,10 @@
             $database = new DatabaseConnect();
             $database = $database->connectDatabase();
             
-            // cria um novo usuario e insere os dados do mesmo 
-            $query = "INSERT INTO tb_users(name, email, password) VALUES ('$user->name', '$user->email', '$user->password')";
-            $stmt = $database->query($query);
-            $stmt->fetch();
+            // cria um novo usuario e insere os dados
+            
+            $stmt = $database->prepare("INSERT INTO tb_users(name, email, password) VALUES (?, ?, ?)");
+            $stmt->execute(Array($user->name, $user->email, $user->password));
         }
     }
 ?>
