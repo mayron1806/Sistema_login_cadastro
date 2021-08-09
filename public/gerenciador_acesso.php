@@ -1,1 +1,0 @@
-<? require_once('../gerenciador_acesso.php'); ?>
