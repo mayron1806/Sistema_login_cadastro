@@ -8,7 +8,6 @@
             $database = $database->connectDatabase();
             
             // cria um novo usuario e insere os dados
-            
             $stmt = $database->prepare("INSERT INTO tb_users(name, email, password) VALUES (?, ?, ?)");
             $stmt->execute(Array($user->name, $user->email, $user->password));
         }

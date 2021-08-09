@@ -1,7 +1,7 @@
 <?php
     class DatabaseConnect{
         private $host = 'localhost';
-        private $db_name = 'db_chatweb';
+        private $db_name = 'db_user';
         private $user = 'root';
         private $pass = '';
 
