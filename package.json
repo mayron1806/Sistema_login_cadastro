@@ -1,0 +1,9 @@
+{
+    "name": "sistema_login_cadastro",
+    "description": "Sistema de login e cadastro usando php com banco de dados mysql e padrão de arquitetura mvc",
+    "version": "2.0",
+    "author": {
+        "name": "Mayron Gonçalves Fernandes",
+        "email": "mayronfernandes01@gmail.com" 
+    }
+}
