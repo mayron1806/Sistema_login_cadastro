@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 09-Ago-2021 às 14:52
+-- Tempo de geração: 09-Ago-2021 às 18:02
 -- Versão do servidor: 10.4.20-MariaDB
 -- versão do PHP: 8.0.9
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `tb_users` (
   `id_user` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `email` varchar(80) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
   `password` varchar(30) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -38,6 +38,10 @@ CREATE TABLE `tb_users` (
 --
 -- Extraindo dados da tabela `tb_users`
 --
+
+INSERT INTO `tb_users` (`id_user`, `name`, `email`, `password`, `status`) VALUES
+(1, 'user1', 'user1@gmail.com', 'senhauser1', 1),
+(2, 'user2', 'user2@gmail.com', 'senhauser2', 1)
 
 --
 -- Índices para tabelas despejadas
@@ -57,7 +61,7 @@ ALTER TABLE `tb_users`
 -- AUTO_INCREMENT de tabela `tb_users`
 --
 ALTER TABLE `tb_users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
