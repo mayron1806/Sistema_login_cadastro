@@ -4,6 +4,9 @@
     if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true){
         header('location: login.php');
     }
+    echo "<pre>";
+        print_r($_SESSION);
+    echo "</pre>";
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +19,6 @@
 </head>
 <body>
     <h1>Welcome <?= $_SESSION['user_name'] ?></h1>
-    <button><a href="../Models/Loguot.php">Sair</a></button>
+    <button><a href="../Lib/Loguot.php">Sair</a></button>
 </body>
 </html>

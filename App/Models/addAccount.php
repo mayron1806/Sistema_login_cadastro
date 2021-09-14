@@ -1,5 +1,6 @@
 <?php
-    require_once(__DIR__.'/../require.php');
+    require_once(__DIR__."/../Lib/DatabaseConnect.php");
+
     class AddAccount{
         // adiciona a conta ao banco de dados
         public function add(User $user){

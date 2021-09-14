@@ -1,9 +1,13 @@
 <?php
     // verifica se o usuario esta logado na conta
     // se estiver vai redirecionar para pagina principal
+    session_start();
     if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true){
         header('location: home.php');
     }
+    echo "<pre>";
+        print_r($_SESSION);
+    echo "</pre>";
 ?>
 
 <!DOCTYPE html>

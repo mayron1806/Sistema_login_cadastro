@@ -1,34 +1,33 @@
 <?php
-    require_once(__DIR__.'/../require.php');
+    require_once(__DIR__."/../Lib/DatabaseConnect.php");
+    
     class CreateAccountValidator{
         private $database;
-        public function validate(User $user)
-        {   
+        public function __construct(){
             // conexao com o banco de dados
             $this->database = new DatabaseConnect();
             $this->database = $this->database->connectDatabase();
-
+        }
+        public function validate(User $user)
+        {
             //validar nome
             $result_name = $this->validateName($user->name);
             if ($result_name != null){
                 return $result_name;
                 die();
             }
-
             //validar email
             $result_email = $this->validateEmail($user->email);
             if ($result_email != null){
                 return $result_email;
                 die();
             }
-
             // validar senha
             $result_password = $this->validatePassword($user->password, $user->confirm_password);
             if ($result_password != null){
                 return $result_password;
                 die();
             }
-            
             // confirma validacao
             if ($result_name == null && $result_email == null && $result_password == null){
                 return 'validated';
