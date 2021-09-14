@@ -1,13 +1,8 @@
 <?php
-<<<<<<< HEAD
-    //session_start();
-    require_once(__DIR__. '/../require.php');
-=======
     session_start();
     require_once(__DIR__."/../Models/User.php");
     require_once(__DIR__."/../Models/CreateAccountValidator.php");
     require_once(__DIR__."/../Models/addAccount.php");
->>>>>>> develop
 
     // cria um novo objeto usuario e adiciona os dados
     $user_input_data = new User();
