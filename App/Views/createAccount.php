@@ -24,7 +24,7 @@
             <div class="show_hide_pass">
                 <input type="checkbox" name="show_hide_pass" id="show_hide_pass"> Mostrar senha
             </div>
-
+            
             <div class="erro">
                 <? if(isset($_GET['createAcoountError']) && $_GET['createAcoountError'] == 'name_size_invalid'){?>
                     <p>The name must contain more than 5 characters and less than 30.</p>
