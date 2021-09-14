@@ -1,7 +1,7 @@
 <?php
     class DatabaseConnect{
         private $host = 'localhost';
-        private $db_name = 'db_user';
+        private $db_name = 'db_users';
         private $user = 'root';
         private $pass = '';
 
