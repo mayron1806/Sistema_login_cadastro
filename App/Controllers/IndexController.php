@@ -8,52 +8,47 @@ use App\Models\User;
 
 class IndexController extends Controller{
     public function index(){
+        if($this->isAuthenticated()){
+            header('location: /app');
+        }
+
         $this->render("index");
     }
     public function login(){
+        if($this->isAuthenticated()){
+            header('location: /app');
+        }
+
         $this->render("login");
     }
     public function create(){
-        $this->render("CriarConta");
-    }
-    public function createAccount(){
-        $this->view->callback = [];
-        // criptograda as senhas
-        $_POST["pass"] = md5($_POST["pass"]);
-        $_POST["confirm_pass"] = md5($_POST["confirm_pass"]);
-
-        // cria um novo objeto de usuario
-        $user = new User();
-        $user->name          = $_POST["name"];
-        $user->email         = $_POST["email"];
-        $user->pass          = $_POST["pass"];
-        $user->confirm_pass  = $_POST["confirm_pass"];
-        $result = $user->validateData();
-        
-        if($result->success == true){
-            $user->createAccount();
+        // verifica se o usuario esta autenticado
+        if($this->isAuthenticated()){
+            header('location: /app');
         }
-        $this->view->callback = [
-            "success" => $result->success,
-            "message" => $result->message
-        ];
 
+        // se a global post nao estiver fazia vai tentar criar uma conta
+        if(!empty($_POST)){
+            // cria um novo objeto de usuario
+            $user = new User();
+            $user->name          = $_POST["name"];
+            $user->email         = $_POST["email"];
+            $user->pass          = md5($_POST["pass"]);
+            $user->confirm_pass  = md5($_POST["confirm_pass"]);
+            
+            // valida as informacoes
+            $result = $user->validateData();
+            
+            // se validar com sucesso cria a conta
+            if($result->success){
+                $user->createAccount();
+            }
+
+            // define as views
+            $this->view->message['status'] = $result->success ? "success" : "error";
+            $this->view->message['message'] = $result->message;
+        }
+        // remderiza a pagina de criacao de conta 
         $this->render("CriarConta");
     }
-    public function loginAccount(){
-        $this->view->callback = [];
-        // criptograda as senhas
-        $_POST["pass"] = md5($_POST["pass"]);
-        // cria um novo objeto de usuario
-        $user = new User();
-        $user->name = $_POST["name"];
-        $user->pass = $_POST["pass"];
-        
-        $result = $user->login();
-        $this->view->callback = [
-            "success" => $result->success,
-            "message" => $result->message
-        ];
-        $this->render("login");
-    }   
 }

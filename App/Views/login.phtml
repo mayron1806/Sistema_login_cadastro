@@ -4,19 +4,59 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Sistema login e cadastro</title>
 </head>
 <body>
-    <form action="/login" method="POST">
-        <input type="text" name="name" placeholder="nome">
-        <input type="password" name="pass" id="" placeholder="senha">
-        <input type="submit" value="Login">
-        <? if(isset($this->view->callback["success"]) && $this->view->callback["success"]){?>
-            <p><?= $this->view->callback["message"]?></p>
-        <? }?>
-        <? if(isset($this->view->callback["success"]) && !$this->view->callback["success"]){?>
-            <p><?= $this->view->callback["message"]?> error</p>
-        <? }?>
-    </form>
+    <main class="content">
+        <form action="/login" method="POST">
+            <h1 class="title">Sistema login e cadastro</h1>
+            <input id="name" type="text" name="name" placeholder="Nome">
+            <input id="password" type="password" name="pass" id="" placeholder="Senha">
+            <input id="submit" type="submit" value="Login">
+            <a href="/" class="back">Voltar</a>
+            <? if(isset($_GET['login']) && $_GET['login'] == "erro"){ ?>
+                <p class="error">Erro no login</p>
+            <? } ?>
+        </form>
+    </main>
+    <script>
+        const name = document.querySelector("#name");
+        const password = document.querySelector("#password");
+        const submit = document.querySelector("#submit");
+
+        let hasName = false;
+        let hasPassowrd = false;
+
+        function activeSubmit(){
+            if(hasPassowrd && hasName){
+                submit.classList.add("interactable");
+            }else{
+                submit.classList.remove("interactable");
+            }
+        }
+        name.addEventListener('keyup', ()=>{
+            if(name.value != ""){  
+                hasName = true;
+                name.classList.remove("no-text");
+            }else{
+                hasName = false;
+                name.classList.add("no-text");
+            }
+            activeSubmit();
+        });
+       
+        password.addEventListener('keyup', ()=>{
+            console.log(password.value);
+            if(password.value != ""){
+                hasPassowrd = true;
+                password.classList.remove("no-text");
+            }else{
+                hasPassowrd = false;
+                password.classList.add("no-text");
+            }
+            activeSubmit();
+        });
+    </script>
 </body>
 </html>

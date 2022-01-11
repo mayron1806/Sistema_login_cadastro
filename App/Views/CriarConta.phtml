@@ -1,24 +1,111 @@
+<?php
+// possiveis mensagens que podem aparecer na tela
+$callback_messages = [
+    "name_size" => "O nome deve ter entre 5 e 50 caracteres",
+    "name_used" => "O nome de usuario já está em uso",
+    "email_used" => "O email já está em uso",
+    "different_passwords" => "As senhas não coincidem",
+    "created" => "Conta criada com sucesso"
+];
+// a mensagem que vai aparecer na tela
+$callback_message;
+foreach($callback_messages as $key => $value){
+    if($key === $this->view->message['message']){
+        $callback_message = $value;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Sistema login e cadastro</title>
+    
 </head>
 <body>
-    <form action="/registrar" method="post">
-        <input name="name" type="text" placeholder="nome">
-        <input type="email" name="email" id="email" placeholder="email">
-        <input type="password" name="pass" id="password" placeholder="senha">
-        <input type="password" name="confirm_pass" id="confirm_password" placeholder="confirmar senha">
-        <input type="submit" value="Criar Conta">
-        <? if(isset($this->view->callback["success"]) && $this->view->callback["success"]){?>
-            <p><?= $this->view->callback["message"]?></p>
-        <? }?>
-        <? if(isset($this->view->callback["success"]) && !$this->view->callback["success"]){?>
-            <p><?= $this->view->callback["message"]?> error</p>
-        <? }?>
-    </form>
+    <main class="content">
+        <form action="/conta/criar" method="post">
+            <h1 class="title">Sistema login e cadastro</h1>
+            <input name="name" id="name" type="text" placeholder="Nome" value="<?= $_POST['name'] ?>">
+            <input type="email" name="email" id="email" placeholder="Email" value="<?= $_POST['email'] ?>">
+            <input type="password" name="pass" id="password" placeholder="Senha">
+            <input type="password" name="confirm_pass" id="confirm_password" placeholder="Confirmar senha">
+            <input type="submit" id="submit" value="Criar Conta">
+            <a href="/" class="back">Voltar</a>
+            <? if($this->view->message['status'] == "error"){?>
+                <p class="error"><?= $callback_message ?></p>
+            <? }else{ ?>
+                <p class="success"><?= $callback_message ?></p>
+            <?}?>
+        </form>
+    </main>
+    <script>
+        const name = document.querySelector("#name");
+        const email = document.querySelector("#email");
+        const password = document.querySelector("#password");
+        const confirm_password = document.querySelector("#confirm_password");
+        const submit = document.querySelector("#submit");
+
+        let hasName = false;
+        let hasPassowrd = false;
+        let hasEmail = false;
+        let hasConfirmPassowrd = false;
+
+        function activeSubmit(){
+            if(hasPassowrd && hasName && hasEmail && hasConfirmPassowrd){
+                submit.classList.add("interactable");
+            }else{
+                submit.classList.remove("interactable");
+            }
+        }
+
+        name.addEventListener('keyup', ()=>{
+            if(name.value != ""){  
+                hasName = true;
+                name.classList.remove("no-text");
+            }else{
+                hasName = false;
+                name.classList.add("no-text");
+            }
+            activeSubmit();
+        });
+
+        email.addEventListener('keyup', ()=>{
+            if(email.value != ""){  
+                hasEmail = true;
+                email.classList.remove("no-text");
+            }else{
+                hasEmail = false;
+                email.classList.add("no-text");
+            }
+            activeSubmit();
+        });
+       
+        password.addEventListener('keyup', ()=>{
+            console.log(password.value);
+            if(password.value != ""){
+                hasPassowrd = true;
+                password.classList.remove("no-text");
+            }else{
+                hasPassowrd = false;
+                password.classList.add("no-text");
+            }
+            activeSubmit();
+        });
+        confirm_password.addEventListener('keyup', ()=>{
+            if(confirm_password.value != ""){  
+                hasConfirmPassowrd = true;
+                confirm_password.classList.remove("no-text");
+            }else{
+                hasConfirmPassowrd = false;
+                confirm_password.classList.add("no-text");
+            }
+            activeSubmit();
+        });
+    </script>
+    
 </body>
 </html>
