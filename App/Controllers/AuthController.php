@@ -11,7 +11,7 @@ class AuthController extends Controller{
         // cria um novo objeto de usuario
         $user = new User();
         $user->name = $_POST["name"];
-        $user->pass = md5($_POST["pass"]);
+        $user->pass = $_POST["pass"];
         
         $result = $user->login();
 

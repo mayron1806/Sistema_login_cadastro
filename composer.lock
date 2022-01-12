@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "86d0610e1f3946833b4795cc8260644e",
+    "content-hash": "15ccc1ac68bb7f56ed8b9e0f8427eb2c",
     "packages": [
         {
             "name": "mayron1806/express_php",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mayron1806/Express_PHP.git",
-                "reference": "383cdf4bae79f817407a7f8705325496848bc86b"
+                "reference": "d7ae15d5e128b5bbf2d4852459e4218f6c758edb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mayron1806/Express_PHP/zipball/383cdf4bae79f817407a7f8705325496848bc86b",
-                "reference": "383cdf4bae79f817407a7f8705325496848bc86b",
+                "url": "https://api.github.com/repos/mayron1806/Express_PHP/zipball/d7ae15d5e128b5bbf2d4852459e4218f6c758edb",
+                "reference": "d7ae15d5e128b5bbf2d4852459e4218f6c758edb",
                 "shasum": ""
             },
             "require": {
@@ -42,9 +42,9 @@
             "description": "Um gerenciador de rotas para PHP baseado na sintaxe do Express (Node.js)",
             "support": {
                 "issues": "https://github.com/mayron1806/Express_PHP/issues",
-                "source": "https://github.com/mayron1806/Express_PHP/tree/v1.0.0"
+                "source": "https://github.com/mayron1806/Express_PHP/tree/v1.1.0"
             },
-            "time": "2022-01-07T22:15:27+00:00"
+            "time": "2022-01-11T23:12:38+00:00"
         }
     ],
     "packages-dev": [],

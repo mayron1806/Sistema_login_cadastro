@@ -9,19 +9,21 @@ class User extends Model{
     protected string $name;
     protected string $email;
     protected string $pass;
-    protected string $confirm_pass;
 
     public function createAccount(){
         $query = "INSERT INTO tb_users(name, email, password) VALUES (?, ?, ?);";
         $stmt = $this->pdo->prepare($query);
-        $stmt->execute(array($this->name, $this->email, $this->pass));
+        $pass_cript = md5($this->pass);
+        $stmt->execute(array($this->name, $this->email, $pass_cript));
     }
     public function login(){
         $returnObj = new \stdClass();
         $returnObj->success = false;
 
         $user = $this->searchInTableUsers(data: $this->name, colunm: "name");
-        if(!empty($user) && $user["password"] === $this->pass){
+        // criptografa a senha
+        $pass_cript = md5($this->pass);
+        if(!empty($user) && $user["password"] == $pass_cript){
             $returnObj->success = true;
             $returnObj->user = $user;
         }
@@ -50,12 +52,17 @@ class User extends Model{
             $returnObj->message = "email_used";
             return $returnObj; 
         }
+        // valid
+        if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            $returnObj->message = "email_invalid";
+            return $returnObj;
+        }
 
         // pass
-        // equal
-        if(!$this->validateEqual($this->pass, $this->confirm_pass)){
-            $returnObj->message = "different_passwords";
-            return $returnObj;
+        // size
+        if(!$this->validateSize($this->pass, 5, 32)){
+            $returnObj->message = "password_size";
+            return $returnObj; 
         }
         $returnObj->message = "created";
         $returnObj->success = true;
@@ -63,7 +70,7 @@ class User extends Model{
     }
 
     private function validateSize(string $property, int $min_size = 0, int $max_size = 1000){
-        if(strlen($property) > $min_size && strlen($property) < $max_size){
+        if(strlen($property) >= $min_size && strlen($property) <= $max_size){
             return true;
         }
         return false;
@@ -76,12 +83,6 @@ class User extends Model{
         $property_db = $stmt->fetch(\PDO::FETCH_ASSOC);
         return $property_db;
     }
-    private function validateEqual(mixed $value1, mixed $value2){
-        if($value1 === $value2){
-            return true;
-        }
-        return false;
-    }
     public function getAllUsers(){
         $query = "SELECT name FROM tb_users WHERE id_user != ?;";
         $stmt = $this->pdo->prepare($query);
@@ -90,4 +91,5 @@ class User extends Model{
         $users = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         return $users;
     }
+    
 }

@@ -1,6 +1,6 @@
 {
     "require": {
-        "mayron1806/express_php" : "1.0.*"
+        "mayron1806/express_php" : "1.1.*"
     },
     "autoload": {
         "psr-4": {

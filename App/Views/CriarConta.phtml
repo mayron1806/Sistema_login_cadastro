@@ -1,14 +1,16 @@
 <?php
 // possiveis mensagens que podem aparecer na tela
 $callback_messages = [
-    "name_size" => "O nome deve ter entre 5 e 50 caracteres",
-    "name_used" => "O nome de usuario já está em uso",
-    "email_used" => "O email já está em uso",
-    "different_passwords" => "As senhas não coincidem",
-    "created" => "Conta criada com sucesso"
+    "name_size" => "O nome deve ter entre 5 e 50 caracteres.",
+    "name_used" => "O nome de usuario já está em uso.",
+    "email_used" => "O email já está em uso.",
+    "email_invalid" => "O email digita é invalido.",
+    "different_passwords" => "As senhas não coincidem.",
+    "password_size" => "A senha deve ter entre 5 e 32 caracteres.",
+    "created" => "Conta criada com sucesso."
 ];
 // a mensagem que vai aparecer na tela
-$callback_message;
+$callback_message = '';
 foreach($callback_messages as $key => $value){
     if($key === $this->view->message['message']){
         $callback_message = $value;
@@ -53,6 +55,10 @@ foreach($callback_messages as $key => $value){
         let hasPassowrd = false;
         let hasEmail = false;
         let hasConfirmPassowrd = false;
+        hasName = name.value !== "";
+        hasPassowrd = password.value !== "";
+        hasEmail = email.value !== "";
+        hasConfirmPassowrd = confirm_password.value !== "";
 
         function activeSubmit(){
             if(hasPassowrd && hasName && hasEmail && hasConfirmPassowrd){
@@ -106,6 +112,5 @@ foreach($callback_messages as $key => $value){
             activeSubmit();
         });
     </script>
-    
 </body>
 </html>
